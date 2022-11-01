@@ -19,12 +19,28 @@ class Rectangle:
         return(self.upperpoint.x_coordinate - self.lowerpoint.x_coordinate) * \
                 (self.upperpoint.y_coordinate - self.lowerpoint.y_coordinate)
 
-if __name__ == '__main__':
-    point = Point(5, 8)
-    lowerpoint = Point(3,7)
-    upperpoint = Point(7,9)
-    rectangle = Rectangle(lowerpoint, upperpoint)
-    print(point.falls_in_rectangle(rectangle))
+class GUIPoint(Point):
 
-    
-        
+    def draw_point(self, canvas, size=10, color='blue'):
+
+        canvas.penup()
+        canvas.goto(self.x_coordinate, self.y_coordinate) # To to a particular coordinate
+        canvas.pendown()
+
+        canvas.dot(size, color)
+
+class GUIRectangle(Rectangle):
+
+    def draw_rectangle(self, canvas):
+        canvas.penup()
+        canvas.goto(self.lowerpoint.x_coordinate, self.lowerpoint.y_coordinate) # To to a particular coordinate
+        canvas.pendown()
+
+        canvas.forward(self.upperpoint.x_coordinate - self.lowerpoint.x_coordinate) # move 100px forward
+        canvas.left(90) # Turn 90 degrees
+        canvas.forward(self.upperpoint.y_coordinate - self.lowerpoint.y_coordinate)
+        canvas.left(90)
+        canvas.forward(self.upperpoint.x_coordinate - self.lowerpoint.x_coordinate)
+        canvas.left(90)
+        canvas.forward(self.upperpoint.y_coordinate - self.lowerpoint.y_coordinate)
+
